@@ -27,8 +27,13 @@ public class User {
     private String name;
     @NotEmpty(message = "*Please provide your lastName")
     private String lastName;
+
+
     private int active;
 
+    @Column(name="tempRole")
+    @NotEmpty(message = "*Please provide your tempRole")
+    private String tempRole;
     @ManyToMany(cascade =CascadeType.ALL)
     @JoinTable(name="user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns=@JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -92,5 +97,11 @@ public class User {
         this.id = id;
     }
 
+    public String getTempRole() {
+        return tempRole;
+    }
 
+    public void setTempRole(String tempRole) {
+        this.tempRole = tempRole;
+    }
 }
