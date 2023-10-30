@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("product")
+@RequestMapping("/product")
 public class ProductController {
 
 
@@ -17,9 +17,13 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("add")
+    @PostMapping("/add")
+
    public Product addProduct(@Valid @RequestBody Product product){
-       return  productService.addProduct(product);
+        System.out.println("begin");
+        Product p= productService.addProduct(product);
+        System.out.println(p);
+        return  p;
    }
     @GetMapping("list")
     public List<Product> getProducts(){
