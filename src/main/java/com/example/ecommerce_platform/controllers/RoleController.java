@@ -4,13 +4,13 @@ import com.example.ecommerce_platform.entities.Role;
 import com.example.ecommerce_platform.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
-@RestController("role")
+@RestController
+@RequestMapping("/role")
 public class RoleController {
 
 
@@ -18,12 +18,12 @@ public class RoleController {
     private RoleService roleService;
 
     @GetMapping("list")
-    public String listRole(Model model){
-        String roleList=roleService.listRoles(model);
+    public List<Role> listRole(Model model){
+        List<Role> roleList=roleService.listRoles(model);
         return roleList;
     }
-    @GetMapping("add")
-    public Map<String, String> addRole(String role){
+    @PostMapping("/add")
+    public Map<String, String> addRole(@RequestParam("role") String role){
         Map<String, String> roles=roleService.addRole(role);
         return roles;
     }

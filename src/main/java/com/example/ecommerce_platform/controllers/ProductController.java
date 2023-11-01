@@ -29,18 +29,18 @@ public class ProductController {
     public List<Product> getProducts(){
         return  productService.getAllProducts();
     }
-    @GetMapping("/{providerId}")
-    public Product getProduct(@PathVariable int providerId ){
-        return productService.getOneProduct(providerId);
+    @GetMapping("/{productId}")
+    public Product getProduct(@PathVariable Long productId ){
+        return productService.getOneProduct(productId);
     }
 
-    @DeleteMapping("/{providerId}")
-    public Product deleteProduct(@PathVariable int providerId ){
-        return productService.deleteProduct(providerId);
+    @DeleteMapping("/{productId}")
+    public Product deleteProduct(@PathVariable Long productId ){
+        return productService.deleteProduct(productId);
     }
-    @PutMapping("/{providerId}")
-    public Product updateProduct(@PathVariable int providerId,@RequestBody Product product ){
-        return productService.updateProduct(product,providerId);
+    @PutMapping("/{productId}")
+    public Product updateProduct(@PathVariable Long productId,@RequestBody Product product ){
+        return productService.updateProduct(product,productId);
     }
 
 

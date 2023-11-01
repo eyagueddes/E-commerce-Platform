@@ -17,7 +17,7 @@ public class RoleService {
 
     @Autowired
     private  RoleRepository roleRepository;
-    public  Map<String, String> addRole(@RequestParam("role") String role){
+    public  Map<String, String> addRole(String role){
         Map<String, String> roles = new HashMap<>(); // Assuming roles are stored in memory
         Role r=new Role(role);
         Role RoleExist=null;
@@ -32,7 +32,7 @@ public class RoleService {
         roles.put( "Role" ,role); // Assuming roles are stored in memory
         return roles;
     }
-    public String listRoles(Model model){
+    public List<Role> listRoles(Model model){
         List<Role> roles= (List<Role>) roleRepository.findAll();
         long nb=roleRepository.count();
         if(roles.size()==0)
@@ -41,7 +41,7 @@ public class RoleService {
             model.addAttribute("roles",roles);
             model.addAttribute("nb",nb);
 
-        return "role/listRoles";
+        return roles;
     }
 
 }

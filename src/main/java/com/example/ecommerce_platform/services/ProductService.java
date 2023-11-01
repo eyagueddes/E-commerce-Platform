@@ -24,10 +24,10 @@ public class ProductService {
     public Product addProduct(@Valid @RequestBody Product product){
       return  productRepository.save(product);
     }
-    public Product getOneProduct(@PathVariable int productId){
+    public Product getOneProduct(@PathVariable Long productId){
         return productRepository.findById(productId).orElseThrow(()->new IllegalArgumentException("product id "+productId+" not found"));
     }
-    public Product updateProduct(@Valid @RequestBody Product product,@PathVariable int productId ){
+    public Product updateProduct(@Valid @RequestBody Product product,@PathVariable Long productId ){
         Product productToUpdate=null;
        Optional<Product> p= productRepository.findById(productId);
        if(p.isPresent()){
@@ -46,7 +46,7 @@ public class ProductService {
 
     }
 
-    public Product deleteProduct(@PathVariable int productId ){
+    public Product deleteProduct(@PathVariable Long productId ){
         Optional<Product> p=productRepository.findById(productId);
         if(p.isPresent()){
             productRepository.delete(p.get());

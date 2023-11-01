@@ -18,7 +18,7 @@ public class RegistrationService {
     private RoleRepository roleRepository;
     @Autowired
     private UserService userService;
-    public User createNewUser(@RequestBody User user){
+    public User createNewUser( User user){
         User u =userService.findUserByEmail(user.getEmail());
 
         if(u!=null){
@@ -27,8 +27,10 @@ public class RegistrationService {
         }
         else{
             Role userRole=roleRepository.findByRole(user.getTempRole());//check if role exist
-            user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-
+            user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));// this role is stored in a HashSet
+            System.out.println(Arrays.asList(userRole));//[com.example.ecommerce_platform.entities.Role@683f1f4e]
+            // Arrays.asList(userRole):This creates a List containing a single element, which is the userRole object.
+            // In a typical Spring Security setup,a user can have multiple roles, but in this case, it appears that a user is being assigned a single role.
             userService.saveUser(user);
 
         }
