@@ -2,6 +2,7 @@ package com.example.ecommerce_platform.services;
 
 import com.example.ecommerce_platform.entities.Role;
 import com.example.ecommerce_platform.entities.User;
+import com.example.ecommerce_platform.exceptions.alreadyExistsException;
 import com.example.ecommerce_platform.repository.RoleRepository;
 import com.example.ecommerce_platform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class RegistrationService {
         User u =userService.findUserByEmail(user.getEmail());
 
         if(u!=null){
-            System.out.println("user already exist");
+           throw new alreadyExistsException("user already exist");
 
         }
         else{

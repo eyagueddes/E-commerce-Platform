@@ -1,6 +1,7 @@
 package com.example.ecommerce_platform.services;
 
 import com.example.ecommerce_platform.entities.Role;
+import com.example.ecommerce_platform.exceptions.alreadyExistsException;
 import com.example.ecommerce_platform.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class RoleService {
            Role savedRole= roleRepository.save(r);
         }
         else{
-            System.out.println("role exist");
+            throw new alreadyExistsException("role exist");
         }
 
         roles.put( "Role" ,role); // Assuming roles are stored in memory

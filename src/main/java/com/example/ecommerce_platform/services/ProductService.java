@@ -18,40 +18,43 @@ public class ProductService {
     private ProductRepository productRepository;
 
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return (List<Product>) productRepository.findAll();
     }
-    public Product addProduct(@Valid @RequestBody Product product){
-      return  productRepository.save(product);
-    }
-    public Product getOneProduct(@PathVariable Long productId){
-        return productRepository.findById(productId).orElseThrow(()->new IllegalArgumentException("product id "+productId+" not found"));
-    }
-    public Product updateProduct(@Valid @RequestBody Product product,@PathVariable Long productId ){
-        Product productToUpdate=null;
-       Optional<Product> p= productRepository.findById(productId);
-       if(p.isPresent()){
-           productToUpdate=p.get();//take the previous object
-           productToUpdate.setDescription(product.getDescription());
-           productToUpdate.setName(product.getName());
-           productToUpdate.setPrice(product.getPrice());
-           productToUpdate.setStock(product.getStock());
-           productRepository.save(productToUpdate);
 
-       }
-       if(productToUpdate==null){
-           throw new IllegalArgumentException("Provider not found");
-       }
-       return productToUpdate;
-
+    public Product addProduct( Product product) {
+        return productRepository.save(product);
     }
 
-    public Product deleteProduct(@PathVariable Long productId ){
-        Optional<Product> p=productRepository.findById(productId);
-        if(p.isPresent()){
+    public Product getOneProduct(Long productId) {
+        return productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("product id " + productId + " not found"));
+    }
+
+    public Product updateProduct( Product product, Long productId) {
+
+        Optional<Product> productToUpdate = productRepository.findById(productId);
+        if (productToUpdate.isPresent()) {
+//            p = p.get();//take the previous object
+            productToUpdate.get().setDescription(product.getDescription());
+            productToUpdate.get().setName(product.getName());
+            productToUpdate.get().setPrice(product.getPrice());
+            productToUpdate.get().setStock(product.getStock());
+            productRepository.save(productToUpdate.get());
+
+        }
+        if (productToUpdate == null) {
+            throw new IllegalArgumentException("Provider not found");
+        }
+        return productToUpdate.get();
+
+    }
+
+    public Product deleteProduct(Long productId) {
+        Optional<Product> p = productRepository.findById(productId);
+        if (p.isPresent()) {
             productRepository.delete(p.get());
         }
-        if(p.get()==null){
+        if (p.get() == null) {
             throw new IllegalArgumentException("Product not found");
         }
         return p.get();
