@@ -4,6 +4,7 @@ import com.example.ecommerce_platform.entities.User;
 import com.example.ecommerce_platform.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController()
 @RequestMapping("/auth")
+@EnableWebSecurity
 //User Authentication
 public class BasicAuthRestController {
 
@@ -22,8 +24,8 @@ public class BasicAuthRestController {
     private UserService userService;
 
     @GetMapping("/basicauth")
-
     public String getCurrentUser() {
+        System.out.println("getCurrentUser");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication);
         User user=null;
