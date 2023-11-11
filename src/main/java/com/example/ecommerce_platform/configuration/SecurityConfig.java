@@ -49,14 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/auth/basicauth").permitAll()
+
                .antMatchers("/**").permitAll() // Allow access to certain paths without authentication
+                .antMatchers("/auth/basicauth").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/product/add").permitAll()
                 .antMatchers("/role/add").hasRole("ADMIN")
