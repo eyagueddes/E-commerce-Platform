@@ -1,42 +1,30 @@
 package com.example.ecommerce_platform.entities;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private List<Product> products;
+
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
     private OrderStatus status;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
 }

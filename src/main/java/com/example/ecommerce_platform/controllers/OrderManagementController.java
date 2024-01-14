@@ -36,12 +36,11 @@ public class OrderManagementController {
          orderManagementService.processOrder(order);
         return "order processed";
     }
-    @PostMapping("/processOrder")
-
+    @PostMapping("/shipOrder")
     public Map<String,String> shipOrder(Order order){
         orderManagementService.shipOrder(order);
         Map<String,String> m = new HashMap<>();
-        m.put("message","message");
+        m.put("order", String.valueOf(order));
         return m;
     }
     @PostMapping("/add/{id}")

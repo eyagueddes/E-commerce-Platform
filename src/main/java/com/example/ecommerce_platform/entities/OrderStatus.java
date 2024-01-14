@@ -5,7 +5,8 @@ package com.example.ecommerce_platform.entities;
         CART,
         PROCESSING,
         SHIPPED,
-        // Add more states as needed
+
+
     }
 
 

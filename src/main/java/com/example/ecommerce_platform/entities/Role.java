@@ -1,9 +1,16 @@
 package com.example.ecommerce_platform.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "role")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
 
     @Id
@@ -15,32 +22,7 @@ public class Role {
     private String role;
 
 
-    public Role(int id, String role) {
-        Id = id;
-        this.role = role;
-    }
-
     public Role(String role) {
-        this.role = role;
-    }
-
-    public Role() {
-
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
         this.role = role;
     }
 }
